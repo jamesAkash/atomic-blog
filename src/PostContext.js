@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { faker } from "@faker-js/faker";
 
 function createRandomPost() {
@@ -14,8 +14,6 @@ function PostProvider({ children }) {
     Array.from({ length: 30 }, () => createRandomPost())
   );
   const [searchQuery, setSearchQuery] = useState("");
-
-  // Derived state. These are the posts that will actually be displayed
   const searchedPosts =
     searchQuery.length > 0
       ? posts.filter((post) =>
@@ -48,4 +46,11 @@ function PostProvider({ children }) {
   );
 }
 
-export { PostProvider, PostContext };
+//Creating cutsom hook
+function usePosts() {
+  const context = useContext(PostContext);
+  return context;
+}
+
+// export { PostProvider, PostContext };
+export { PostProvider, usePosts };
