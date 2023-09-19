@@ -49,6 +49,8 @@ function PostProvider({ children }) {
 //Creating cutsom hook
 function usePosts() {
   const context = useContext(PostContext);
+  if (context === undefined)
+    throw new Error("PostContext was used outside the Provider");
   return context;
 }
 
